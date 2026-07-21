@@ -42,8 +42,6 @@ export const messagesFr: Messages = {
     placeholderTitle: "Contenu indicatif",
     placeholderBody:
       "Les études de cas ci-dessous sont des exemples illustratifs — clients, chiffres et citations sont inventés. Remplacez-les par de vrais projets avant la mise en ligne.",
-    legal: "Mentions légales",
-    lastReviewed: "Dernière révision",
     language: "Langue",
     contactDetails: "Coordonnées",
     backHome: "Retour à l'accueil",
@@ -224,9 +222,6 @@ export const messagesFr: Messages = {
   },
   footer: {
     company: "Entreprise",
-    legal: "Mentions légales",
-    privacy: "Politique de confidentialité",
-    terms: "Conditions d'utilisation",
     rights: "Tous droits réservés.",
   },
   workflow: {

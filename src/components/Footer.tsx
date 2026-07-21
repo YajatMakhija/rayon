@@ -22,19 +22,12 @@ export function Footer({ locale }: { locale: Locale }) {
         { label: t.nav.contact, href: localePath(locale, "/contact") },
       ],
     },
-    {
-      heading: t.footer.legal,
-      links: [
-        { label: t.footer.privacy, href: localePath(locale, "/privacy") },
-        { label: t.footer.terms, href: localePath(locale, "/terms") },
-      ],
-    },
   ];
 
   return (
     <footer className="bg-violet-deep text-white">
       <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8">
-        <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[1.6fr_1fr]">
           <div className="max-w-sm">
             <Logo locale={locale} inverted />
             <p className="mt-4 text-sm leading-relaxed text-white/65">{t.meta.tagline}.</p>

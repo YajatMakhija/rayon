@@ -40,8 +40,6 @@ export const messagesEn = {
     placeholderTitle: "Placeholder content",
     placeholderBody:
       "The case studies below are illustrative examples written to build this page — the clients, figures and quotes are invented. Replace them with real engagements before launch.",
-    legal: "Legal",
-    lastReviewed: "Last reviewed",
     language: "Language",
     contactDetails: "Contact details",
     backHome: "Back to home",
@@ -221,9 +219,6 @@ export const messagesEn = {
   },
   footer: {
     company: "Company",
-    legal: "Legal",
-    privacy: "Privacy policy",
-    terms: "Terms of service",
     rights: "All rights reserved.",
   },
   workflow: {
