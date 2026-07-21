@@ -1,26 +1,323 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ──────────────────────────────────────────────────────────────
+   DESIGN TOKENS — Yellow.ai–inspired enterprise palette
+
+   Warm golden yellow carries every primary action. Deep violet
+   signals enterprise trust. Soft ivory surfaces keep the product
+   feeling open and professional rather than dark / technical.
+   ────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Surfaces — lightest to softest tint */
+  --color-ink-950: #fffdf8;
+  --color-ink-900: #ffffff;
+  --color-ink-850: #fff7e6;
+  --color-ink-800: #f4efe4;
+  --color-ink-700: #ebe4d6;
+
+  /* Hairlines */
+  --color-line: #ebe5d8;
+  --color-line-strong: #d9d0bc;
+
+  /* Text — near-black with a violet undertone */
+  --color-fg: #1b1228;
+  --color-fg-muted: #5a5368;
+  --color-fg-subtle: #8b8499;
+
+  /* Primary — golden yellow */
+  --color-accent: #f5c400;
+  --color-accent-bright: #ffd84d;
+  --color-accent-dim: #d9ad00;
+
+  /* Enterprise violet */
+  --color-violet: #6b2d9b;
+  --color-violet-soft: #f3eafb;
+  --color-violet-deep: #2d1248;
+
+  /* Metrics / emphasis gold (kept distinct from CTA yellow) */
+  --color-amber: #c98900;
+
+  --color-success: #2f8f5b;
+  --color-danger: #c4464a;
+
+  --font-sans: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, SFMono-Regular, monospace;
+
+  --radius-card: 16px;
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ───────────────────────────── base ───────────────────────────── */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-ink-950);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+  font-weight: 700;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ────────────────────────── utilities ────────────────────────── */
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-violet);
+}
+
+/* Soft yellow wash for hero / CTA bands */
+.grid-backdrop {
+  background-image:
+    radial-gradient(ellipse 70% 55% at 15% 10%, color-mix(in oklab, var(--color-accent) 28%, transparent), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 90% 20%, color-mix(in oklab, var(--color-violet) 12%, transparent), transparent 55%),
+    linear-gradient(to right, color-mix(in oklab, var(--color-line) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-line) 55%, transparent) 1px, transparent 1px);
+  background-size: auto, auto, 56px 56px, 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 25%, transparent 80%);
+}
+
+.glow-accent {
+  background: radial-gradient(
+    ellipse 70% 55% at 40% 0%,
+    color-mix(in oklab, var(--color-accent) 32%, transparent),
+    transparent 70%
+  );
+}
+
+.glow-violet {
+  background: radial-gradient(
+    ellipse 50% 45% at 85% 15%,
+    color-mix(in oklab, var(--color-violet) 14%, transparent),
+    transparent 70%
+  );
+}
+
+.surface-card {
+  background: var(--color-ink-900);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 1px 2px rgb(27 18 40 / 0.04), 0 8px 24px rgb(27 18 40 / 0.04);
+}
+
+/* ────────────────────────── animation ────────────────────────── */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-rise {
+  animation: rise 0.75s var(--ease-out-soft) both;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.animate-dash {
+  stroke-dasharray: 4 8;
+  animation: dash 1.2s linear infinite;
+}
+
+@keyframes pulse-node {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-node {
+  animation: pulse-node 2.6s ease-in-out infinite;
+}
+
+@keyframes logo-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.logo-marquee {
+  animation: logo-marquee 55s linear infinite;
+  animation-play-state: running !important;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.logo-marquee:hover,
+.logo-marquee:focus,
+.logo-marquee:active {
+  animation-play-state: running !important;
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float-soft 5s ease-in-out infinite;
+}
+
+/* Soft drifting grid in the hero */
+@keyframes grid-drift {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  50% {
+    background-position: 0 0, 0 0, 18px 10px, 10px 18px;
+  }
+  100% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+}
+
+.grid-backdrop.animate-grid-drift {
+  animation: grid-drift 22s ease-in-out infinite;
+}
+
+/* Primary CTA gentle pulse */
+@keyframes cta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 8px 20px rgb(245 196 0 / 0.28);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 12px 28px rgb(245 196 0 / 0.42);
+  }
+}
+
+.animate-cta-pulse {
+  animation: cta-pulse 2.8s ease-in-out infinite;
+}
+
+.animate-cta-pulse:hover,
+.animate-cta-pulse:focus-visible {
+  animation-play-state: paused;
+}
+
+/* Top bar one-shot shimmer on load */
+@keyframes bar-shimmer {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.topbar-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgb(255 255 255 / 0.45) 50%,
+    transparent 65%
+  );
+  animation: bar-shimmer 1.6s var(--ease-out-soft) 0.4s both;
+  pointer-events: none;
+}
+
+/* Scroll-in reveal for cards — opacity only so grid rows stay aligned */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal-pending {
+  opacity: 0;
+}
+
+.reveal-in {
+  animation: reveal-up 0.7s var(--ease-out-soft) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .logo-marquee {
+    animation: none !important;
+  }
+  .grid-backdrop.animate-grid-drift,
+  .animate-cta-pulse,
+  .topbar-shimmer::after,
+  .animate-dash,
+  .animate-float,
+  .animate-pulse-node {
+    animation: none !important;
+  }
+  .reveal-pending {
+    opacity: 1;
+  }
 }
