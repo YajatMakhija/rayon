@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
+import { GoogleTag } from "@/components/GoogleTag";
 import { Header } from "@/components/Header";
 import { TopBar } from "@/components/TopBar";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -102,6 +103,7 @@ export default async function LocaleLayout({
       className={`${display.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <GoogleTag />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
