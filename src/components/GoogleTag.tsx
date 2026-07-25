@@ -2,9 +2,8 @@ import Script from "next/script";
 import { site } from "@/lib/site";
 
 /**
- * Google tag (gtag.js) for Google Ads conversion tracking.
- * Loaded via next/script with `afterInteractive` so it does not block
- * first paint. Renders nothing when `googleTagId` is empty.
+ * Google tag (gtag.js) — GA4.
+ * Loaded once sitewide via next/script. Renders nothing when ID is empty.
  */
 export function GoogleTag() {
   const id = site.googleTagId;

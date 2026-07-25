@@ -102,8 +102,10 @@ export default async function LocaleLayout({
       lang={locale}
       className={`${display.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      <head>
         <GoogleTag />
+      </head>
+      <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

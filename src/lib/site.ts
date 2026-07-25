@@ -34,8 +34,8 @@ export const site = {
     x: "",
   },
 
-  // Google tag (Google Ads / gtag.js). Empty string disables the tag.
-  googleTagId: "AW-18340606168",
+  // Google tag (gtag.js / GA4). Empty string disables the tag.
+  googleTagId: "G-84GK0P9115",
 
   nav: [
     { label: "Services", href: "/services" },
